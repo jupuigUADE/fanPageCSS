@@ -1,0 +1,521 @@
+/* Reset y configuración base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: #e0e0e0;
+    background-color: #0a0a0a;
+    background-image: 
+        radial-gradient(circle at 25% 25%, #1a0a0a 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, #0a1a0a 0%, transparent 50%);
+}
+
+/* Container general */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header y navegación */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    border-bottom: 2px solid #ff6b6b;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+.logo h1 {
+    font-family: 'Creepster', cursive;
+    font-size: 1.8rem;
+    color: #ff6b6b;
+    text-shadow: 0 0 20px #ff6b6b;
+    letter-spacing: 2px;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: #e0e0e0;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+}
+
+.nav-links a:hover {
+    color: #ff6b6b;
+    background-color: rgba(255, 107, 107, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Sección Hero */
+.hero {
+    margin-top: 80px;
+    padding: 4rem 2rem;
+    display: flex;
+    align-items: center;
+    min-height: 70vh;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a0a0a 50%, #0a1a0a 100%);
+}
+
+.hero-content {
+    flex: 1;
+    max-width: 600px;
+}
+
+.hero-content h2 {
+    font-family: 'Creepster', cursive;
+    font-size: 3.5rem;
+    color: #ff6b6b;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 30px #ff6b6b;
+    line-height: 1.2;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #c0c0c0;
+    line-height: 1.8;
+}
+
+.hero-image {
+    flex: 1;
+    text-align: center;
+    margin-left: 2rem;
+}
+
+.hero-image img {
+    max-width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 15px;
+    border: 3px solid #ff6b6b;
+    box-shadow: 
+        0 0 30px rgba(255, 107, 107, 0.3),
+        0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+}
+
+.hero-image img:hover {
+    transform: scale(1.05) rotateY(5deg);
+}
+
+/* Botones */
+.cta-button, .submit-button {
+    background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+}
+
+.cta-button:hover, .submit-button:hover {
+    background: linear-gradient(45deg, #ff8e53, #ff6b6b);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.5);
+}
+
+.cta-button:active, .submit-button:active {
+    transform: translateY(-1px);
+}
+
+/* Sección Personajes */
+.characters {
+    padding: 5rem 0;
+    background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
+}
+
+.characters h2 {
+    font-family: 'Creepster', cursive;
+    font-size: 3rem;
+    text-align: center;
+    color: #ff6b6b;
+    margin-bottom: 3rem;
+    text-shadow: 0 0 20px #ff6b6b;
+}
+
+.characters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.character-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.character-card:hover {
+    border-color: #ff6b6b;
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(255, 107, 107, 0.2);
+    background: rgba(255, 107, 107, 0.1);
+}
+
+.character-card img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1.5rem;
+    border: 4px solid #ff6b6b;
+    box-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
+    transition: all 0.3s ease;
+}
+
+.character-card:hover img {
+    box-shadow: 0 0 30px rgba(255, 107, 107, 0.6);
+    transform: scale(1.1);
+}
+
+.character-card h3 {
+    font-family: 'Creepster', cursive;
+    font-size: 1.5rem;
+    color: #ff6b6b;
+    margin-bottom: 1rem;
+}
+
+.character-card p {
+    color: #c0c0c0;
+    line-height: 1.6;
+}
+
+/* Sección Temporadas */
+.seasons {
+    padding: 5rem 0;
+    background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
+}
+
+.seasons h2 {
+    font-family: 'Creepster', cursive;
+    font-size: 3rem;
+    text-align: center;
+    color: #ff6b6b;
+    margin-bottom: 3rem;
+    text-shadow: 0 0 20px #ff6b6b;
+}
+
+.seasons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.season-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 2rem;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    position: relative;
+    backdrop-filter: blur(10px);
+}
+
+.season-card:hover {
+    border-color: #ff6b6b;
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(255, 107, 107, 0.2);
+}
+
+.season-number {
+    position: absolute;
+    top: -20px;
+    left: 2rem;
+    background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+}
+
+.season-card h3 {
+    font-family: 'Creepster', cursive;
+    font-size: 1.8rem;
+    color: #ff6b6b;
+    margin: 1rem 0;
+}
+
+.episode-count {
+    color: #ff8e53;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.season-card > p {
+    color: #c0c0c0;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.episode-list {
+    list-style: none;
+    padding-left: 1rem;
+}
+
+.episode-list li {
+    color: #a0a0a0;
+    padding: 0.3rem 0;
+    border-left: 2px solid #ff6b6b;
+    padding-left: 1rem;
+    margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.episode-list li:hover {
+    color: #ff6b6b;
+    padding-left: 1.5rem;
+}
+
+/* Sección Contacto */
+.contact {
+    padding: 5rem 0;
+    background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
+}
+
+.contact h2 {
+    font-family: 'Creepster', cursive;
+    font-size: 3rem;
+    text-align: center;
+    color: #ff6b6b;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 20px #ff6b6b;
+}
+
+.contact > .container > p {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #c0c0c0;
+    margin-bottom: 3rem;
+}
+
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 3rem;
+    border-radius: 15px;
+    border: 2px solid rgba(255, 107, 107, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #ff6b6b;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid rgba(255, 107, 107, 0.3);
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.3);
+    color: #e0e0e0;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #ff6b6b;
+    box-shadow: 0 0 15px rgba(255, 107, 107, 0.3);
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.checkbox-group input {
+    width: auto;
+}
+
+.submit-button {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+/* Footer */
+footer {
+    background: linear-gradient(135deg, #2c1810 0%, #1a0f0a 50%, #0f0a1a 100%);
+    color: #e0e0e0;
+    padding: 3rem 0 1rem;
+    border-top: 3px solid #ff6b6b;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-section h3 {
+    font-family: 'Creepster', cursive;
+    color: #ff6b6b;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section ul li a {
+    color: #c0c0c0;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+    color: #ff6b6b;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-link {
+    color: #c0c0c0;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border: 1px solid rgba(255, 107, 107, 0.3);
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    color: #ff6b6b;
+    border-color: #ff6b6b;
+    background: rgba(255, 107, 107, 0.1);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 107, 107, 0.3);
+    color: #a0a0a0;
+    font-size: 0.9rem;
+}
+
+/* Scroll suave */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .hero-image {
+        margin-left: 0;
+        margin-top: 2rem;
+    }
+    
+    .hero-content h2 {
+        font-size: 2.5rem;
+    }
+    
+    .characters-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .seasons-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .nav-links {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    nav {
+        flex-direction: column;
+        padding: 1rem;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .social-links {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content h2 {
+        font-size: 2rem;
+    }
+    
+    .characters h2,
+    .seasons h2,
+    .contact h2 {
+        font-size: 2rem;
+    }
+    
+    .contact-form {
+        padding: 2rem 1rem;
+        margin: 0 1rem;
+    }
+}
