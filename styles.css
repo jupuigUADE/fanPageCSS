@@ -13,6 +13,7 @@ body {
     background-image: 
         radial-gradient(circle at 25% 25%, #1a0a0a 0%, transparent 50%),
         radial-gradient(circle at 75% 75%, #0a1a0a 0%, transparent 50%);
+    overflow-x: hidden;
 }
 
 /* Container general */
@@ -31,6 +32,7 @@ header {
     backdrop-filter: blur(10px);
     z-index: 1000;
     border-bottom: 2px solid #ff6b6b;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
 }
 
 nav {
@@ -38,6 +40,7 @@ nav {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
+    position: relative;
 }
 
 .logo h1 {
@@ -46,6 +49,35 @@ nav {
     color: #ff6b6b;
     text-shadow: 0 0 20px #ff6b6b;
     letter-spacing: 2px;
+}
+
+/* Menú hamburguesa */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.menu-toggle .bar {
+    width: 25px;
+    height: 3px;
+    background-color: #ff6b6b;
+    margin: 3px 0;
+    transition: 0.3s;
+    border-radius: 2px;
+}
+
+.menu-toggle.active .bar:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.menu-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active .bar:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
 }
 
 .nav-links {
@@ -61,12 +93,30 @@ nav {
     transition: all 0.3s ease;
     padding: 0.5rem 1rem;
     border-radius: 5px;
+    position: relative;
 }
 
-.nav-links a:hover {
+.nav-links a:hover,
+.nav-links a.active {
     color: #ff6b6b;
     background-color: rgba(255, 107, 107, 0.1);
     transform: translateY(-2px);
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #ff6b6b;
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
 }
 
 /* Sección Hero */
@@ -122,7 +172,7 @@ nav {
     transform: scale(1.05) rotateY(5deg);
 }
 
-/* Botones */
+/* Botones mejorados */
 .cta-button, .submit-button {
     background: linear-gradient(45deg, #ff6b6b, #ff8e53);
     color: white;
@@ -132,20 +182,50 @@ nav {
     font-size: 1.1rem;
     font-weight: bold;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     text-transform: uppercase;
     letter-spacing: 1px;
     box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.cta-button::before, .submit-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.cta-button:hover::before, .submit-button:hover::before {
+    left: 100%;
 }
 
 .cta-button:hover, .submit-button:hover {
     background: linear-gradient(45deg, #ff8e53, #ff6b6b);
-    transform: translateY(-3px);
+    transform: translateY(-3px) scale(1.05);
     box-shadow: 0 8px 25px rgba(255, 107, 107, 0.5);
 }
 
 .cta-button:active, .submit-button:active {
-    transform: translateY(-1px);
+    transform: translateY(-1px) scale(1.02);
+}
+
+.cta-button.secondary {
+    background: transparent;
+    border: 2px solid #ff6b6b;
+    color: #ff6b6b;
+}
+
+.cta-button.secondary:hover {
+    background: #ff6b6b;
+    color: white;
 }
 
 /* Sección Personajes */
@@ -219,6 +299,20 @@ nav {
 .seasons {
     padding: 5rem 0;
     background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
+    position: relative;
+}
+
+.seasons::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(circle at 20% 30%, rgba(255, 107, 107, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(255, 142, 83, 0.03) 0%, transparent 50%);
+    pointer-events: none;
 }
 
 .seasons h2 {
@@ -454,27 +548,316 @@ footer {
     font-size: 0.9rem;
 }
 
-/* Scroll suave */
+/* Scroll suave y animaciones */
 html {
     scroll-behavior: smooth;
 }
 
-/* Responsive Design */
+/* Animaciones de entrada */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes glow {
+    0%, 100% {
+        text-shadow: 0 0 20px #ff6b6b;
+    }
+    50% {
+        text-shadow: 0 0 30px #ff6b6b, 0 0 40px #ff6b6b;
+    }
+}
+
+/* Aplicar animaciones */
+.character-card {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+}
+
+.character-card:nth-child(1) { animation-delay: 0.1s; }
+.character-card:nth-child(2) { animation-delay: 0.2s; }
+.character-card:nth-child(3) { animation-delay: 0.3s; }
+.character-card:nth-child(4) { animation-delay: 0.4s; }
+.character-card:nth-child(5) { animation-delay: 0.5s; }
+.character-card:nth-child(6) { animation-delay: 0.6s; }
+
+.season-card {
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+.season-card:nth-child(1) { animation-delay: 0.2s; }
+.season-card:nth-child(2) { animation-delay: 0.4s; }
+.season-card:nth-child(3) { animation-delay: 0.6s; }
+
+.logo h1 {
+    animation: glow 2s ease-in-out infinite;
+}
+
+/* Efectos de hover mejorados con transformaciones */
+.character-card:hover {
+    border-color: #ff6b6b;
+    transform: translateY(-10px) rotateY(5deg);
+    box-shadow: 
+        0 15px 30px rgba(255, 107, 107, 0.2),
+        0 0 30px rgba(255, 107, 107, 0.1);
+    background: rgba(255, 107, 107, 0.1);
+}
+
+.season-card:hover {
+    border-color: #ff6b6b;
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(255, 107, 107, 0.2);
+}
+
+/* Focus visible para accesibilidad */
+.nav-links a:focus-visible,
+.cta-button:focus-visible,
+.submit-button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: 2px solid #ff6b6b;
+    outline-offset: 2px;
+}
+
+/* Mejora de contraste en estados de focus */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #ff6b6b;
+    box-shadow: 
+        0 0 0 2px rgba(255, 107, 107, 0.2),
+        0 0 15px rgba(255, 107, 107, 0.3);
+}
+
+/* Estilos adicionales para formularios mejorados */
+.page-hero {
+    margin-top: 80px;
+    padding: 4rem 2rem;
+    text-align: center;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a0a0a 50%, #0a1a0a 100%);
+    min-height: 40vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-hero h1 {
+    font-family: 'Creepster', cursive;
+    font-size: 3rem;
+    color: #ff6b6b;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 30px #ff6b6b;
+}
+
+.page-hero p {
+    font-size: 1.2rem;
+    color: #c0c0c0;
+    max-width: 600px;
+}
+
+/* Estilos para episodios detallados */
+.season-detailed {
+    margin-bottom: 4rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 15px;
+    padding: 2rem;
+    border: 1px solid rgba(255, 107, 107, 0.2);
+}
+
+.season-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    gap: 2rem;
+}
+
+.season-info h3 {
+    font-family: 'Creepster', cursive;
+    font-size: 2rem;
+    color: #ff6b6b;
+    margin-bottom: 0.5rem;
+}
+
+.episodes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.episode-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 107, 107, 0.3);
+    transition: all 0.3s ease;
+}
+
+.episode-card:hover {
+    transform: translateY(-5px);
+    border-color: #ff6b6b;
+    box-shadow: 0 10px 20px rgba(255, 107, 107, 0.2);
+}
+
+.episode-number {
+    background: #ff6b6b;
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    display: inline-block;
+}
+
+.episode-card h4 {
+    color: #ff6b6b;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+/* Traits y características */
+.character-traits {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.trait {
+    background: rgba(255, 107, 107, 0.2);
+    color: #ff6b6b;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    border: 1px solid rgba(255, 107, 107, 0.4);
+}
+
+/* Personajes secundarios */
+.secondary-characters {
+    padding: 3rem 0;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.secondary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.secondary-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+    border: 1px solid rgba(255, 107, 107, 0.3);
+    transition: all 0.3s ease;
+}
+
+.secondary-card:hover {
+    border-color: #ff6b6b;
+    transform: translateY(-3px);
+}
+
+.secondary-card h3 {
+    color: #ff6b6b;
+    margin-bottom: 1rem;
+    font-family: 'Creepster', cursive;
+}
+
+/* Responsive Design Completo */
+@media (max-width: 1024px) {
+    nav {
+        padding: 1rem 1.5rem;
+    }
+    
+    .hero {
+        padding: 3rem 1.5rem;
+    }
+    
+    .hero-content h2 {
+        font-size: 3rem;
+    }
+    
+    .characters-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+}
+
 @media (max-width: 768px) {
+    /* Menú móvil */
+    .menu-toggle {
+        display: flex;
+    }
+    
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        width: 100%;
+        max-width: 300px;
+        background: rgba(0, 0, 0, 0.98);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        transition: right 0.3s ease;
+        backdrop-filter: blur(20px);
+        border-left: 2px solid #ff6b6b;
+    }
+    
+    .nav-links.active {
+        right: 0;
+    }
+    
+    .nav-links li {
+        text-align: center;
+    }
+    
+    .nav-links a {
+        font-size: 1.2rem;
+        padding: 1rem 2rem;
+    }
+    
+    /* Hero responsivo */
     .hero {
         flex-direction: column;
         text-align: center;
+        padding: 2rem 1rem;
+        min-height: 80vh;
     }
     
     .hero-image {
         margin-left: 0;
         margin-top: 2rem;
+        order: -1;
+    }
+    
+    .hero-image img {
+        height: 300px;
+        width: 100%;
+        max-width: 400px;
     }
     
     .hero-content h2 {
         font-size: 2.5rem;
     }
     
+    .page-hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    /* Grids responsivos */
     .characters-grid {
         grid-template-columns: 1fr;
     }
@@ -483,16 +866,15 @@ html {
         grid-template-columns: 1fr;
     }
     
-    .nav-links {
-        flex-direction: column;
-        gap: 0.5rem;
+    .episodes-grid {
+        grid-template-columns: 1fr;
     }
     
-    nav {
-        flex-direction: column;
-        padding: 1rem;
+    .secondary-grid {
+        grid-template-columns: 1fr;
     }
     
+    /* Footer responsivo */
     .footer-content {
         grid-template-columns: 1fr;
         text-align: center;
@@ -501,11 +883,31 @@ html {
     .social-links {
         justify-content: center;
     }
+    
+    /* Formulario responsivo */
+    .contact-form {
+        padding: 2rem 1rem;
+        margin: 0 1rem;
+    }
+    
+    /* Ajustes de navegación */
+    nav {
+        padding: 1rem;
+    }
+    
+    .logo h1 {
+        font-size: 1.5rem;
+    }
 }
 
 @media (max-width: 480px) {
     .hero-content h2 {
         font-size: 2rem;
+        line-height: 1.1;
+    }
+    
+    .hero-content p {
+        font-size: 1rem;
     }
     
     .characters h2,
@@ -514,8 +916,62 @@ html {
         font-size: 2rem;
     }
     
+    .page-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .character-card,
+    .season-card {
+        padding: 1.5rem;
+    }
+    
+    .character-card img {
+        width: 120px;
+        height: 120px;
+    }
+    
     .contact-form {
-        padding: 2rem 1rem;
-        margin: 0 1rem;
+        padding: 1.5rem 1rem;
+    }
+    
+    .logo h1 {
+        font-size: 1.2rem;
+    }
+    
+    nav {
+        padding: 0.8rem;
+    }
+    
+    .season-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .character-traits {
+        justify-content: center;
+    }
+}
+
+/* Mejoras de accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Mejoras de contraste para mejor legibilidad */
+@media (prefers-contrast: high) {
+    .nav-links a:hover,
+    .nav-links a.active {
+        background-color: rgba(255, 107, 107, 0.3);
+    }
+    
+    .character-card:hover,
+    .season-card:hover {
+        border-color: #ff8e53;
+        background: rgba(255, 107, 107, 0.15);
     }
 }

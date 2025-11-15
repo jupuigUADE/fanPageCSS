@@ -13,8 +13,14 @@
             <div class="logo">
                 <h1>STRANGER THINGS</h1>
             </div>
-            <ul class="nav-links">
-                <li><a href="#inicio">Inicio</a></li>
+            <!-- Botón hamburguesa para móvil -->
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul class="nav-links" id="nav-menu">
+                <li><a href="#inicio" class="active">Inicio</a></li>
                 <li><a href="#personajes">Personajes</a></li>
                 <li><a href="#temporadas">Temporadas</a></li>
                 <li><a href="#contacto">Contacto</a></li>
@@ -31,7 +37,7 @@
                 <button class="cta-button">Explorar la Serie</button>
             </div>
             <div class="hero-image">
-                <img src="https://images.unsplash.com/photo-1602562086757-78809c34ceb4?q=80&w=1738&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Stranger Things">
+                <img src="https://images.unsplash.com/photo-1602562086757-78809c34ceb4?q=80&w=1738&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Imagen representativa de Stranger Things mostrando la atmósfera misteriosa de los años 80">
             </div>
         </section>
 
@@ -41,32 +47,32 @@
                 <h2>Personajes Principales</h2>
                 <div class="characters-grid">
                     <div class="character-card">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face" alt="Mike Wheeler">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face" alt="Mike Wheeler - Líder del grupo de amigos">
                         <h3>Mike Wheeler</h3>
                         <p>Líder del grupo, valiente y leal a sus amigos. Su determinación lo lleva a enfrentar los peligros del Mundo del Revés.</p>
                     </div>
                     <div class="character-card">
-                        <img src="https://images.unsplash.com/photo-1622568333049-4a21936f7175?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Eleven">
+                        <img src="https://images.unsplash.com/photo-1622568333049-4a21936f7175?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Eleven - Niña con poderes telequinéticos">
                         <h3>Eleven</h3>
                         <p>Una niña con poderes telequinéticos que escapa de un laboratorio gubernamental. Tiene la capacidad de acceder al Mundo del Revés.</p>
                     </div>
                     <div class="character-card">
-                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face" alt="Dustin Henderson">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face" alt="Dustin Henderson - El científico del grupo">
                         <h3>Dustin Henderson</h3>
                         <p>El científico del grupo, inteligente y divertido. Su conocimiento en ciencia ayuda al grupo a entender las amenazas sobrenaturales.</p>
                     </div>
                     <div class="character-card">
-                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face" alt="Lucas Sinclair">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face" alt="Lucas Sinclair - El realista del grupo">
                         <h3>Lucas Sinclair</h3>
                         <p>Pragmático y escéptico, pero siempre está ahí para sus amigos cuando más lo necesitan.</p>
                     </div>
                     <div class="character-card">
-                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face" alt="Joyce Byers">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face" alt="Joyce Byers - Madre protectora">
                         <h3>Joyce Byers</h3>
                         <p>Madre de Will Byers, determinada a encontrar a su hijo desaparecido. Su intuición maternal la guía hacia la verdad.</p>
                     </div>
                     <div class="character-card">
-                        <img src="./public/hopper.jpg" alt="Jim Hopper">
+                        <img src="public/hopper.jpg" alt="Jim Hopper - Jefe de policía de Hawkins">
                         <h3>Jim Hopper</h3>
                         <p>Jefe de policía de Hawkins que se convierte en una figura paterna para Eleven y descubre los secretos del laboratorio.</p>
                     </div>
@@ -124,7 +130,7 @@
             <div class="container">
                 <h2>Únete a la Comunidad de Fans</h2>
                 <p>Comparte tu amor por Stranger Things y conecta con otros fans</p>
-                <form class="contact-form" mailto="jpuigperalta@uade.edu.ar">
+                <form class="contact-form" action="mailto:jpuigperalta@uade.edu.ar" method="post" enctype="text/plain">
                     <div class="form-group">
                         <label for="name">Nombre:</label>
                         <input type="text" id="name" name="name" required>
@@ -191,5 +197,24 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // JavaScript para el menú móvil
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+
+        mobileMenu.addEventListener('click', function() {
+            mobileMenu.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Cerrar menú al hacer clic en un enlace
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
 </body>
 </html>
